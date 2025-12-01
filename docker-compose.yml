@@ -1,0 +1,71 @@
+services:
+  mcp-server:
+    build: .
+    container_name: mcp-server
+    pull_policy: build
+    ports:
+      - 8511:8511
+    restart: always
+    depends_on:
+      - open-webui
+    environment:
+      - OMV_MCP_SERVER_HOST="0.0.0.0"
+      - OMV_MCP_SERVER_PORT="8511"
+      - OMV_MCP_SERVER_TRANSPORT="streamable-http"
+      - OMV_RPC_URL="https://omv8box.internal/rpc.php"
+      - OMV_RPC_AUTH_USERNAME="admin"
+      - OMV_RPC_AUTH_PASSWORD="admin"
+    networks:
+      - ollama
+
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:latest
+    container_name: mcpo
+    pull_policy: missing
+    ports:
+      - 8000:8000
+    depends_on:
+      - mcp-server
+      - open-webui
+    restart: always
+    command: >
+      mcpo
+      --port 8000
+      --server-type "streamable-http"
+      -- http://mcp-server:8511/mcp
+    networks:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    pull_policy: missing
+    ports:
+      - 11434:11434
+    volumes:
+      - ./.ollama/ollama:/root/.ollama
+    restart: always
+    networks:
+      - ollama
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    pull_policy: missing
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_API_BASE_URL=http://ollama:11434
+    ports:
+      - 3000:8080
+    volumes:
+      - ./.ollama/open-webui:/app/backend/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    networks:
+      - ollama
+
+networks:
+  ollama:
+    external: false

@@ -1,0 +1,12 @@
+{
+  "name": "openmediavault-mcp",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npx @modelcontextprotocol/inspector"
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.17.2"
+  }
+}
