@@ -32,10 +32,12 @@ With the appropriate model, you will have a chat experience similar to ChatGPT.
 
 You will reach the following services after starting the stack:
 
+```
 ollama: http://127.0.0.1:11434
 open-webui: http://127.0.0.1:3000
 mcpo: http://127.0.0.1:8000
 openmediavault MCP server: http://127.0.0.1:8511
+```
 
 # Start the stack
 
