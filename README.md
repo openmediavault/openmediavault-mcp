@@ -1,6 +1,10 @@
 This is the prototype of an MCP server for openmediavault. It was created
 during SUSE HackWeek 25.
 
+![sysinfo](./docs/assets/sysinfo.png)
+![filesystems](./docs/assets/filesystems.png)
+![sharedfolders](./docs/assets/sharedfolders.png)
+
 It is intended to be the basis for a plugin for openmediavault to give users
 the ability to administer their system from any chat client, such as Claude Desktop.
 
