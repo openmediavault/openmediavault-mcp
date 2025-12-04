@@ -1,3 +1,26 @@
+This is the prototype of an MCP server for openmediavault. It was created
+during SUSE HackWeek 25.
+
+It is intended to be the basis for a plugin for openmediavault to give users
+the ability to administer their system from any chat client, such as Claude Desktop.
+
+The plan is that only the MCP server runs on the openmediavault system and can be
+docked to any tool that supports MCP. The connection is then established via URL:
+
+```
+http(s)://<FQDN>:8511/mcp
+```
+
+# ToDo
+
+- Convert to an openmediavault plugin
+- Authentication
+- More tools for system administration
+- Better error handling
+- Tests
+- Documentation
+- etc.
+
 # The self-hosted LLM stack
 
 This software stack consists of ollama + open-webui + mcpo + openmediavault MCP server.
